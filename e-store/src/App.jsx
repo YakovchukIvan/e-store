@@ -1,6 +1,5 @@
-import './index.css';
+import React from 'react';
 
-// Array of product data with details about each product in the store
 const productData = [
   {
     name: 'Laptop Pro',
@@ -46,96 +45,22 @@ const productData = [
   },
 ];
 
-// Main App component that renders the Header, Catalog, and Footer components
-export default function App() {
+const App = () => {
   return (
     <>
-      <Header />
-      <Catalog />
-      <Footer />
+      <h1>E-Store </h1>
+      {productData.map((item) => (
+        <div key={item.name}>
+          <h2>{item.name}</h2>
+          <p>{item.description}</p>
+          <p>💵 {item.price}$</p>
+          <img src={item.photoName} alt={item.name} width="100" />
+          {item.soldOut && <p style={{ color: 'red' }}>SOLD OUT</p>}
+          <hr />
+        </div>
+      ))}
     </>
   );
-}
+};
 
-// Header component that displays the store name, navigation, and working hours
-export function Header() {
-  const hour = new Date().getHours(); // Get the current hour
-  const openHours = 9; // Store opening hour
-  const closeHours = 21; // Store closing hour
-
-  // Determine if the store is currently open
-  const isOpen = hour >= openHours && hour <= closeHours;
-
-  return (
-    <header className="header">
-      <h1>Electronik Store</h1>
-      {/* Navigation menu */}
-      <nav className="nav">
-        <ul>
-          <li>
-            Home
-            <a href="#home"></a>
-          </li>
-          <li>
-            Catalog
-            <a href="#catalog"></a>
-          </li>
-          <li>
-            About Us
-            <a href="#about"></a>
-          </li>
-          <li>
-            Contacts
-            <a href="#contacts"></a>
-          </li>
-        </ul>
-      </nav>
-      {/* Display opening hours message based on whether the store is open or closed */}
-      <div className="working-hours">
-        {isOpen ? (
-          <p>
-            We are currently open. Hours: {openHours}:00 - {closeHours}:00
-          </p>
-        ) : (
-          <p>
-            We are closed. Open from {openHours}:00 - {closeHours}:00
-          </p>
-        )}
-      </div>
-    </header>
-  );
-}
-
-// Catalog component that displays a list of products
-function Catalog() {
-  return (
-    <main className="catalog">
-      <ul className="products">
-        {/* Map through product data to render each product as a Product component */}
-        {productData.map((item) => (
-          <Product productOjb={item} key={item.name} />
-        ))}
-      </ul>
-    </main>
-  );
-}
-
-// Product component that displays individual product details
-function Product({ productOjb }) {
-  return (
-    <li className={`product ${productOjb.soldOut ? 'sold-out' : ''}`}>
-      <img src={productOjb.photoName} alt={productOjb.name} />
-      <div>
-        <h3>{productOjb.name}</h3>
-        <p>{productOjb.description}</p>
-        {/* Display "SOLD-OUT" if the product is sold out, otherwise show the price */}
-        <span>{productOjb.soldOut ? 'SOLD-OUT' : productOjb.price}</span>
-      </div>
-    </li>
-  );
-}
-
-// Footer component, currently just displaying "Footer" text
-function Footer() {
-  return <footer className="footer">Footer</footer>;
-}
+export default App;
