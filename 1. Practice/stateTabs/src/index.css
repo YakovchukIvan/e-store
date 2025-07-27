@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f3f3f3;
+  background: linear-gradient(#eb8181, #404586);
   margin: 0;
   display: flex;
   justify-content: center;
@@ -61,6 +61,7 @@ button:hover {
 }
 
 .card-container {
+  min-height: 345px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -131,6 +132,16 @@ button:hover {
 
 .navigation-buttons button:hover {
   background-color: #357ab8;
+}
+
+button:disabled {
+  background-color: #ccc;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+button:disabled:hover {
+  background-color: #ccc;
 }
 
 .footer {
