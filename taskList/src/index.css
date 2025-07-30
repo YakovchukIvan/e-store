@@ -23,7 +23,7 @@ body {
   max-width: 500px;
   width: 100%;
   margin: 0 auto;
-  gap: 20px;
+  gap: 40px;
   padding: 20px;
   box-sizing: border-box;
 }
@@ -216,6 +216,12 @@ select {
 .task-info {
   flex: 1;
   text-align: left;
+  margin-right: 30px;
+}
+
+.task-info div:first-child {
+  display: flex;
+  justify-content: space-between;
 }
 
 /* Date text style */

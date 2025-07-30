@@ -1,9 +1,40 @@
 import { useState } from 'react';
 
-function App() {
-  const [tasks, setTasks] = useState([]);
+const defaulTask = [
+  {
+    completed: false,
+    deadline: '2025-07-30T08:34',
+    id: 1753868092248,
+    priority: 'Low',
+    title: 'Купити продукти в АТБ',
+  },
+  {
+    completed: false,
+    deadline: '2025-06-30T12:35',
+    id: 1753868102919,
+    priority: 'Low',
+    title: 'Приготовити вечерю',
+  },
+  {
+    completed: false,
+    deadline: '2025-05-30T20:35',
+    id: 1753868113071,
+    priority: 'Medium',
+    title: 'Прибрати вдома',
+  },
+  {
+    completed: false,
+    deadline: '2025-08-02T16:35',
+    id: 1753868138607,
+    priority: 'High',
+    title: 'Генеральне прибирання вдома',
+  },
+];
 
-  console.log(tasks);
+function App() {
+  const [tasks, setTasks] = useState(defaulTask);
+  const [sortType, setSortType] = useState('date');
+  const [sortOrder, setSortOrder] = useState('asc');
 
   const [openSection, setOpenSection] = useState({
     taskList: false,
@@ -21,6 +52,41 @@ function App() {
   const addTask = (task) => {
     setTasks([...tasks, { ...task, completed: false, id: Date.now() }]);
   };
+
+  const completeTask = (id) => {
+    setTasks(tasks.map((task) => (task.id === id ? { ...task, completed: true } : task)));
+  };
+
+  const deleteTask = (id) => {
+    setTasks(tasks.filter((task) => task.id !== id));
+  };
+
+  const sortTask = (tasks) => {
+    return tasks.slice().sort((a, b) => {
+      if (sortType === 'priority') {
+        const priorityOrder = { High: 1, Medium: 2, Low: 3 };
+        return sortOrder === 'asc'
+          ? priorityOrder[a.priority] - priorityOrder[b.priority]
+          : priorityOrder[b.priority] - priorityOrder[a.priority];
+      } else {
+        return sortOrder === 'asc'
+          ? new Date(a.deadline) - new Date(b.deadline)
+          : new Date(b.deadline) - new Date(a.deadline);
+      }
+    });
+  };
+
+  const toggleSortOrder = (type) => {
+    if (sortType === type) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortType(type);
+      setSortOrder('asc');
+    }
+  };
+
+  const activeTasks = sortTask(tasks.filter((task) => !task.completed));
+  const comptedTasks = sortTask(tasks.filter((task) => task.completed));
 
   return (
     <div className="app">
@@ -45,10 +111,22 @@ function App() {
         </button>
 
         <div className="sort-controls">
-          <button className="sort-button">By Date</button>
-          <button className="sort-button">By Priority</button>
+          <button
+            className={`sort-button ${sortType === 'date' ? 'active' : ''}`}
+            onClick={() => toggleSortOrder('date')}
+          >
+            By Date {sortType === 'date' && (sortOrder === 'asc' ? '\u2191' : '\u2193')}
+          </button>
+          <button
+            className={`sort-button ${sortType === 'priority' ? 'active' : ''}`}
+            onClick={() => toggleSortOrder('priority')}
+          >
+            By Priority {sortType === 'priority' && (sortOrder === 'asc' ? '\u2191' : '\u2193')}
+          </button>
         </div>
-        {openSection.tasks && <TaskList />}
+        {openSection.tasks && (
+          <TaskList activeTasks={activeTasks} deleteTask={deleteTask} completeTask={completeTask} />
+        )}
       </div>
 
       <div className="completed-task-container">
@@ -59,7 +137,9 @@ function App() {
         >
           +
         </button>
-        {openSection.completedTasks && <CompletedTaskList />}
+        {openSection.completedTasks && (
+          <CompletedTaskList comptedTasks={comptedTasks} deleteTask={deleteTask} />
+        )}
       </div>
 
       <Footer />
@@ -68,74 +148,95 @@ function App() {
 }
 
 const TaskForm = ({ addTask }) => {
-  const [title, setTitle] = useState('');
-  const [priority, setPriority] = useState('Low');
-  const [deadline, setDeadline] = useState('');
+  const [formData, setFormData] = useState({
+    title: '',
+    priority: 'Low',
+    deadline: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const { title, deadline } = formData;
+
     if (title.trim() && deadline) {
-      addTask({ title, priority, deadline });
-      setTitle('');
-      setPriority('Low');
-      setDeadline('');
+      addTask(formData);
+      setFormData({ title: '', priority: 'Low', deadline: '' });
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} action="" className="task-form">
+    <form onSubmit={handleSubmit} className="task-form">
       <input
         type="text"
-        value={title}
+        name="title"
+        value={formData.title}
         placeholder="Task title"
         required
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={handleChange}
       />
-      <select value={priority} onChange={(e) => setPriority(e.target.value)}>
+      <select name="priority" value={formData.priority} onChange={handleChange}>
         <option value="High">High</option>
         <option value="Medium">Medium</option>
         <option value="Low">Low</option>
       </select>
       <input
         type="datetime-local"
+        name="deadline"
         required
-        value={deadline}
-        onChange={(e) => setDeadline(e.target.value)}
+        value={formData.deadline}
+        onChange={handleChange}
       />
       <button type="submit">Add task</button>
     </form>
   );
 };
 
-const TaskList = () => {
+const TaskList = ({ activeTasks, deleteTask, completeTask }) => {
   return (
     <ul className="task-list">
-      <TaskItem />
+      {activeTasks.map((task) => (
+        <TaskItem key={task.id} task={task} deleteTask={deleteTask} completeTask={completeTask} />
+      ))}
     </ul>
   );
 };
 
-const TaskItem = () => {
+const TaskItem = ({ task, deleteTask, completeTask }) => {
+  const { title, priority, deadline, id, completed } = task;
+
   return (
-    <li className="task-item">
+    <li className={`task-item ${priority.toLowerCase()}`}>
       <div className="task-info">
         <div>
-          Title <strong>Medium</strong>
+          {title} <strong>{priority}</strong>
         </div>
-        <div className="task-deadline">Due: {new Date().toLocaleString()}</div>
+        <div className="task-deadline">Due: {new Date(deadline).toLocaleString()}</div>
       </div>
       <div className="task-buttons">
-        <button className="complete-button">Complete</button>
-        <button className="delete-button">Delete</button>
+        {!completed && (
+          <button className="complete-button" onClick={() => completeTask(id)}>
+            Complete
+          </button>
+        )}
+        <button className="delete-button" onClick={() => deleteTask(id)}>
+          Delete
+        </button>
       </div>
     </li>
   );
 };
 
-const CompletedTaskList = () => {
+const CompletedTaskList = ({ comptedTasks, deleteTask }) => {
   return (
     <ul className="completed-task-list">
-      <TaskItem />
+      {comptedTasks.map((task) => (
+        <TaskItem key={task.id} task={task} deleteTask={deleteTask} />
+      ))}
     </ul>
   );
 };
