@@ -1,14 +1,13 @@
-import TaskItem from './TaskItem';
+import TaskListWrapper from './TaskListWrapper';
 
-const TaskList = ({ activeTasks, deleteTask, completeTask }) => {
-  return activeTasks.length === 0 ? (
-    <p className="empty-list-message">No active tasks yet.</p>
-  ) : (
-    <ul className="task-list">
-      {activeTasks.map((task) => (
-        <TaskItem key={task.id} task={task} deleteTask={deleteTask} completeTask={completeTask} />
-      ))}
-    </ul>
-  );
-};
+const TaskList = ({ activeTasks, archiveTask, completeTask }) => (
+  <TaskListWrapper
+    tasks={activeTasks}
+    archiveTask={archiveTask}
+    completeTask={completeTask}
+    emptyMessage="No active tasks yet."
+    listClassName="task-list"
+  />
+);
+
 export default TaskList;
