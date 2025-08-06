@@ -14,6 +14,7 @@ const Button = ({
         fullWidth ? 'full-цidth' : ''
       } `}
       onClick={onClick}
+      disabled={isDisabled}
     >
       {icon && <span>{icon}</span>}
       {text} {children}
