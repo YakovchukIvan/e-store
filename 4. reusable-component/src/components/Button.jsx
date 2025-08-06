@@ -11,7 +11,7 @@ const Button = ({
   return (
     <button
       className={`button ${variant} ${size} ${isDisabled ? 'disabled' : ''} ${
-        fullWidth ? 'full-цidth' : ''
+        fullWidth ? 'full-width' : ''
       } `}
       onClick={onClick}
       disabled={isDisabled}
