@@ -1,9 +1,7 @@
-const Button = ({ children, onClick, variant }) => {
+export default function Button({ children, variant, handleClick }) {
   return (
-    <button className={`button ${variant} `} onClick={onClick}>
+    <button className={variant} onClick={handleClick}>
       {children}
     </button>
   );
-};
-
-export default Button;
+}

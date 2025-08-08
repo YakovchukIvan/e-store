@@ -1,5 +1,8 @@
+import { useState } from 'react';
 import Main from './components/Main';
 import './index.css';
+import ModalWindow from './components/Modal';
+import Button from './components/Button';
 
 // 1. Створіть окремі компоненти:
 //- Button: універсальний компонент кнопки.
@@ -35,9 +38,44 @@ import './index.css';
 // - Це допоможе уникнути передачі пропсів через проміжний компонент Main.
 
 function App() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const alertCloseModal = () => {
+    alert('OK');
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="app">
-      <Main></Main>
+      <Main isModalOpen={isModalOpen} openModal={openModal}>
+        <ModalWindow
+          title="Confirm Your Action"
+          content="Are you sure you want to proceed? This action cannot be undone."
+          showButton
+          closeModal={closeModal}
+          alertCloseModal={alertCloseModal}
+        >
+          <Button handleClick={closeModal} variant={'closeButton'}>
+            &times;
+          </Button>
+
+          <Button handleClick={closeModal} variant={'secondaryButton'}>
+            Cancel
+          </Button>
+
+          <Button handleClick={alertCloseModal} variant={'primaryButton'}>
+            Yes, Continue
+          </Button>
+        </ModalWindow>
+      </Main>
     </div>
   );
 }
