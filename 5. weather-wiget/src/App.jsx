@@ -8,12 +8,39 @@ function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [coords, setCoords] = useState(null);
 
   useEffect(() => {
+    if (!navigator.geolocation) {
+      setError('Geolocation is not supported by your bwoser');
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        console.log(position);
+        const { latitude, longitude } = position.coords;
+        setCoords({ latitude, longitude });
+      },
+      (err) => {
+        console.error('Geolocation error', err.message);
+        setError('Failed to get your location');
+      },
+    );
+  }, []);
+
+  useEffect(() => {
+    if (!city.trim() && !coords) {
+      setWeatherData(null);
+      setError(null);
+      return;
+    }
+
     async function getData() {
       setLoading(true);
       try {
-        const res = await fetch(`http://api.weatherapi.com/v1/current.json?key=${KEY}&q=${city}`);
+        const query = city.trim() ? city : `${coords.latitude}, ${coords.longitude}`;
+        const res = await fetch(`http://api.weatherapi.com/v1/current.json?key=${KEY}&q=${query}`);
         const data = await res.json();
 
         if (data.error) {
@@ -32,7 +59,7 @@ function App() {
       }
     }
     getData();
-  }, [city]);
+  }, [city, coords]);
 
   const renderError = () => {
     return <p>{error}</p>;
