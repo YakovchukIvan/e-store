@@ -19,16 +19,51 @@ p {
   margin: 0;
 }
 
-.widget-container {
+.container {
   text-align: center;
   max-width: 400px;
   width: 90%;
-  min-height: 420px;
   padding: 20px;
   border-radius: 15px;
   background: linear-gradient(135deg, #849abe, #214176);
   box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.widget-container {
+  min-height: 420px;
+}
+
+.timer-container {
+  margin-bottom: 20px;
+}
+
+.btn-timer {
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 15px;
+  background: #2b61b8;
+  box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: transform 1s ease, opacity 1s ease;
+}
+
+.btn-timer:hover {
+  background: #214a8d;
+}
+
+.btn-timer:active {
+  transform: scale(1.02);
+  opacity: 0.8;
+}
+
+.btn-timer:disabled {
+  opacity: 0.5;
+  cursor: no-drop;
 }
 
 .app-title {
@@ -65,7 +100,7 @@ p {
 }
 
 .weather-card {
-  /* background: linear-gradient(135deg, #98aacb, #103d89);  */
+  /* background: linear-gradient(135deg, #98aacb, #103d89); */
   padding: 15px;
   border-radius: 10px;
   /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); */
