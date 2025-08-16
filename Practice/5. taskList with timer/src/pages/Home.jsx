@@ -1,33 +1,24 @@
 import Footer from '../components/layout/Footer';
-import DateTimer from '../components/DateTimer';
 import SectionToggleButton from '../components/common/SectionToggleButton';
 import TaskForm from '../components/tasks/TaskForm';
 import SortControls from '../components/tasks/SortControls';
 import TaskList from '../components/tasks/TaskList';
 import CompletedTaskList from '../components/tasks/CompletedTaskList';
 import ArchiveTaskList from '../components/tasks/ArchiveTaskList';
+import DateTimer from '../components/DateTimer';
 
 import { useTaskManager } from '../hooks/useTaskManager';
 import { sortTask } from '../utils/sortTask';
 import { isActiveTask, isArchivedTask, isCompletedTask } from '../utils/taskFilters';
 import { useSections } from '../hooks/useSections';
-import { useOverdueTasks } from '../hooks/useOverdueTasks';
 import { useDateTime } from '../hooks/useDateTime';
 import { useSorting } from '../hooks/useSorting';
 
 function Home() {
-  const { tasks, setTasks, addTask, completeTask, toggleArchiveTask, deleteTask } =
-    useTaskManager();
+  const { tasks, addTask, completeTask, toggleArchiveTask, deleteTask } = useTaskManager();
   const { openSection, toggleSection } = useSections();
-  // const { dateTimer } = useDateTime();
+  const { dateTimer } = useDateTime();
   const { sortType, sortOrder, toggleSortOrder } = useSorting();
-
-  console.log('1', new Date());
-  console.log('2', new Date(tasks[0].deadline));
-  console.log(new Date() > new Date(tasks[0].deadline));
-
-  // Автоматичне відмічення прострочених задач
-  // useOverdueTasks(dateTimer, tasks, setTasks);
 
   // Фільтровані та відсортовані списки задач
   const activeTasks = sortTask(tasks.filter(isActiveTask), sortType, sortOrder);
@@ -36,7 +27,7 @@ function Home() {
 
   return (
     <div className="app">
-      {/* <DateTimer dateTimer={dateTimer} /> */}
+      <DateTimer dateTimer={dateTimer} />
 
       <div className="task-container">
         <h1>Task List with Priority</h1>
@@ -61,6 +52,7 @@ function Home() {
             activeTasks={activeTasks}
             archiveTask={toggleArchiveTask}
             completeTask={completeTask}
+            dateTimer={dateTimer}
           />
         )}
       </div>

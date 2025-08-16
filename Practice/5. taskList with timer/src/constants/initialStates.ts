@@ -1,4 +1,4 @@
-type Sections = {
+export type Sections = {
   taskList: boolean;
   tasks: boolean;
   completedTasks: boolean;

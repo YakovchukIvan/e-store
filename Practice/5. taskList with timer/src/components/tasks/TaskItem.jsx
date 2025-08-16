@@ -1,15 +1,15 @@
-const TaskItem = ({ task, archiveTask, completeTask, deleteTask }) => {
-  const { title, priority, deadline, id, completed, archived = false, overdue = false } = task;
+const TaskItem = ({ task, archiveTask, completeTask, deleteTask, isOverdue = false }) => {
+  const { title, priority, deadline, id, completed, archived = false } = task;
 
   const formattedDeadline = new Date(deadline).toLocaleString();
 
   return (
-    <li className={`task-item ${priority.toLowerCase()} ${overdue ? 'overdue' : ''}`}>
+    <li className={`task-item ${priority.toLowerCase()} ${isOverdue ? 'overdue' : ''}`}>
       <div className="task-info">
-        <div className={`task-title ${overdue ? 'overdue-title' : ''}`}>
+        <div className={`task-title ${isOverdue ? 'overdue-title' : ''}`}>
           {title} <strong>{priority}</strong>
         </div>
-        <div className={`task-deadline ${overdue ? 'overdue-deadline' : ''}`}>
+        <div className={`task-deadline ${isOverdue ? 'overdue-deadline' : ''}`}>
           Due: {formattedDeadline}
         </div>
       </div>

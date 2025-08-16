@@ -1,10 +1,15 @@
 import { useState } from 'react';
-import { INITIAL_SECTIONS } from '../constants/initialStates';
+import { INITIAL_SECTIONS, Sections } from '../constants/initialStates';
 
-export const useSections = () => {
-  const [openSection, setOpenSection] = useState(INITIAL_SECTIONS);
+type UseSectionsResult = {
+  openSection: Sections;
+  toggleSection: (section: keyof Sections) => void;
+};
 
-  const toggleSection = (section) => {
+export const useSections = (): UseSectionsResult => {
+  const [openSection, setOpenSection] = useState<Sections>(INITIAL_SECTIONS);
+
+  const toggleSection = (section: keyof Sections) => {
     setOpenSection((prev) => ({
       ...prev,
       [section]: !prev[section],

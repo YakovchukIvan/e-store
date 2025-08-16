@@ -7,6 +7,7 @@ const TaskListWrapper = ({
   deleteTask = null,
   emptyMessage,
   listClassName,
+  dateTimer,
 }) => {
   return tasks.length === 0 ? (
     <p className="empty-list-message">{emptyMessage}</p>
@@ -19,6 +20,7 @@ const TaskListWrapper = ({
           archiveTask={archiveTask}
           completeTask={completeTask}
           deleteTask={deleteTask}
+          isOverdue={new Date(task.deadline) < dateTimer}
         />
       ))}
     </ul>
