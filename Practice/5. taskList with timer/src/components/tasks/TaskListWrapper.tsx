@@ -1,6 +1,18 @@
+import React from 'react';
+import { Task } from '../../types';
 import TaskItem from './TaskItem';
 
-const TaskListWrapper = ({
+interface TaskListWrapperProps {
+  tasks?: Task[];
+  archiveTask: (id: number) => void;
+  completeTask: (id: number) => void;
+  deleteTask?: ((id: number) => void) | null | undefined;
+  emptyMessage: string;
+  listClassName?: string;
+  dateTimer?: Date;
+}
+
+const TaskListWrapper: React.FC<TaskListWrapperProps> = ({
   tasks = [],
   archiveTask,
   completeTask,
@@ -20,7 +32,7 @@ const TaskListWrapper = ({
           archiveTask={archiveTask}
           completeTask={completeTask}
           deleteTask={deleteTask}
-          isOverdue={new Date(task.deadline) < dateTimer}
+          isOverdue={dateTimer ? new Date(task.deadline) < dateTimer : false}
         />
       ))}
     </ul>

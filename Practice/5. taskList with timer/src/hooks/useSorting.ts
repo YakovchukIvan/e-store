@@ -1,11 +1,11 @@
 import { useState } from 'react';
+import { SortOrder, SortType } from '../types';
 
-// hooks/useSorting.js
 export const useSorting = () => {
-  const [sortType, setSortType] = useState('date');
-  const [sortOrder, setSortOrder] = useState('asc');
+  const [sortType, setSortType] = useState<SortType>('date');
+  const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
 
-  const toggleSortOrder = (type) => {
+  const toggleSortOrder = (type: SortType) => {
     if (sortType === type) {
       setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
     } else {

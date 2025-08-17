@@ -1,6 +1,22 @@
-const TaskItem = ({ task, archiveTask, completeTask, deleteTask, isOverdue = false }) => {
-  const { title, priority, deadline, id, completed, archived = false } = task;
+import React from 'react';
+import { Task } from '../../types';
 
+interface TaskItemProps {
+  task: Task;
+  archiveTask: (id: number) => void;
+  completeTask: (id: number) => void;
+  deleteTask?: ((id: number) => void) | null;
+  isOverdue?: boolean;
+}
+
+const TaskItem: React.FC<TaskItemProps> = ({
+  task,
+  archiveTask,
+  completeTask,
+  deleteTask = null,
+  isOverdue = false,
+}) => {
+  const { title, priority, deadline, id, completed, archived = false } = task;
   const formattedDeadline = new Date(deadline).toLocaleString();
 
   return (
@@ -19,9 +35,11 @@ const TaskItem = ({ task, archiveTask, completeTask, deleteTask, isOverdue = fal
             <button className="complete-button" onClick={() => archiveTask(id)}>
               Unarchive
             </button>
-            <button className="delete-button" onClick={() => deleteTask(id)}>
-              Delete
-            </button>
+            {deleteTask && (
+              <button className="delete-button" onClick={() => deleteTask(id)}>
+                Delete
+              </button>
+            )}
           </>
         ) : (
           <>

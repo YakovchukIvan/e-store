@@ -1,18 +1,24 @@
 import { useState } from 'react';
+import { ChangeEvent, FormEvent } from 'react';
+import { TaskFormData } from '../../types';
 
-const TaskForm = ({ addTask }) => {
+interface TaskFormProps {
+  addTask: (task: TaskFormData) => void;
+}
+
+const TaskForm = ({ addTask }: TaskFormProps) => {
   const [formData, setFormData] = useState({
     title: '',
     priority: 'Low',
     deadline: '',
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const { title, deadline } = formData;
 
