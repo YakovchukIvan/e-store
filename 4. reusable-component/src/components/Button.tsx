@@ -1,3 +1,16 @@
+import { ReactNode } from 'react';
+
+type ButtonProps = {
+  onClick: () => void;
+  variant?: 'primary' | 'secondary' | 'danger' | 'gradient' | 'outline';
+  size?: 'small' | 'medium' | 'large';
+  isDisabled?: boolean;
+  fullWidth?: boolean;
+  children?: ReactNode;
+  text?: string;
+  icon?: ReactNode;
+};
+
 const Button = ({
   text = '',
   icon,
@@ -7,12 +20,12 @@ const Button = ({
   isDisabled = false,
   onClick,
   children,
-}) => {
+}: ButtonProps): JSX.Element => {
   return (
     <button
       className={`button ${variant} ${size} ${isDisabled ? 'disabled' : ''} ${
         fullWidth ? 'full-width' : ''
-      } `}
+      }`}
       onClick={onClick}
       disabled={isDisabled}
     >

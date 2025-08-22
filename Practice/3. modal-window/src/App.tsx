@@ -38,7 +38,7 @@ import Button from './components/Button';
 // - Це допоможе уникнути передачі пропсів через проміжний компонент Main.
 
 function App() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const openModal = () => {
     setIsModalOpen(true);

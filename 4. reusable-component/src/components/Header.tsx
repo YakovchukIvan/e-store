@@ -1,6 +1,10 @@
 import downloadButtonFile from '../utils/downloadButton';
 
-const Header = ({ showInstructions, toggleInstructions }) => {
+type HeaderProps = {
+  showInstructions: boolean;
+  toggleInstructions: () => void;
+};
+const Header = ({ showInstructions, toggleInstructions }: HeaderProps) => {
   return (
     <header className="app-header">
       <h1>UI Component Library</h1>

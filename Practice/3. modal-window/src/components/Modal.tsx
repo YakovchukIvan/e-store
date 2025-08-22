@@ -1,4 +1,11 @@
-export default function Modal({ closeModal, title = 'Title', content = 'content', children }) {
+import { ModalWindowProps } from '../types';
+
+export default function Modal({
+  closeModal,
+  title = 'Title',
+  content = 'content',
+  children,
+}: ModalWindowProps) {
   return (
     <div className="overlay" onClick={closeModal}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>

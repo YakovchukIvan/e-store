@@ -1,6 +1,7 @@
+import { MainProps } from '../types';
 import Button from './Button';
 
-export default function Main({ isModalOpen, openModal, children }) {
+export default function Main({ isModalOpen, openModal, children }: MainProps) {
   return (
     <>
       <h1 className="title">Universal Modal Component</h1>

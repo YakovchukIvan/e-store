@@ -4,15 +4,16 @@ import TimerComponent from './Components/TimerComponent';
 import RenderError from './Components/RenderError';
 import RenderLoading from './Components/RenderLoading';
 import RenderWeather from './Components/RenderWeather';
+import { Coords, WeatherData } from './types/types';
 
 const KEY = 'f7def371145f43adbee94458250908';
 
 function App() {
-  const [city, setCity] = useState('');
-  const [weatherData, setWeatherData] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [coords, setCoords] = useState(null);
+  const [city, setCity] = useState<string>('');
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [coords, setCoords] = useState<Coords | null>(null);
 
   useEffect(() => {
     if (!navigator.geolocation) {
@@ -45,7 +46,7 @@ function App() {
     async function getData() {
       setLoading(true);
       try {
-        const query = city.trim() ? city : `${coords.latitude}, ${coords.longitude}`;
+        const query = city.trim() ? city : `${coords?.latitude}, ${coords?.longitude}`;
         const res = await fetch(`http://api.weatherapi.com/v1/current.json?key=${KEY}&q=${query}`, {
           signal,
         });

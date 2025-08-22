@@ -1,4 +1,11 @@
-const Section = ({ children, title }) => {
+import { ReactNode } from 'react';
+
+type SectionProps = {
+  children: ReactNode;
+  title: string;
+};
+
+const Section = ({ children, title }: SectionProps) => {
   return (
     <section className="component-group">
       <h2>{title}</h2>

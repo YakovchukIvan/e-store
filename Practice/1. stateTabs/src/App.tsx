@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import './index.css';
 import CardContainer from './components/CardContainer';
+import { CardType } from './types';
 
 //UA
 // 1 - Створіть стан isOpen для керування відкриттям і закриттям додатків. Інтерфейс відкривається при натисканні на хрестик і відображається при натисканні на кнопку «Начать».
 // 2 - Реалізуйте функції відображення карточек в залежності від активного вкладки. Переключати вкладки можна як натисканням на кнопки «Попередня» і «Далі», так і натисканням на саму вкладку.
 
-const cardData = [
+const cardData: CardType[] = [
   {
     title: 'Mocha',
     description: 'Developing a fintech product for the international market',
@@ -49,23 +50,22 @@ const cardData = [
   },
 ];
 
-const tabData = [
-  [cardData[0], cardData[1]], // Tab 1
-  [cardData[2], cardData[3]], // Tab 2
-  [cardData[4]], // Tab 3
+const tabData: CardType[][] = [
+  [cardData[0]!, cardData[1]!],
+  [cardData[2]!, cardData[3]!],
+  [cardData[4]!],
 ];
 
 export default function App() {
-  const [isOpen, setIsOpen] = useState(true);
-  const [active, setActive] = useState(1);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [active, setActive] = useState<number>(1);
 
-  const handlePage = (number) => {
+  const handlePage = (number: number) => {
     setActive(number);
   };
 
-  const changePage = (direction) => {
+  const changePage = (direction: 1 | -1) => {
     const newActive = active + direction;
-
     if (newActive >= 1 && newActive <= tabData.length) {
       setActive(newActive);
     }
@@ -73,8 +73,8 @@ export default function App() {
 
   return (
     <>
-      {isOpen ? (
-        <button onClick={() => setIsOpen((prev) => !prev)}>Start</button>
+      {!isOpen ? (
+        <button onClick={() => setIsOpen(true)}>Start</button>
       ) : (
         <div className="app">
           <h1>State Tabs Card Display</h1>
@@ -103,7 +103,7 @@ export default function App() {
             </button>
           </div>
 
-          <CardContainer cards={tabData[active - 1]} />
+          <CardContainer cards={tabData[active - 1] || []} />
 
           <div className="navigation-buttons">
             <button onClick={() => changePage(-1)} disabled={active === 1}>

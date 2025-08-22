@@ -1,24 +1,20 @@
 import { useEffect, useState } from 'react';
 
-const TimerComponent = () => {
-  const [count, setCount] = useState(0);
-  const [isRunning, setIsRunning] = useState(false);
+const TimerComponent = (): JSX.Element => {
+  const [count, setCount] = useState<number>(0);
+  const [isRunning, setIsRunning] = useState<boolean>(false);
 
   useEffect(() => {
-    let timer;
+    let timer: number | undefined;
+
     if (isRunning) {
-      // Встановлюємо таймер, якщо він включений
       timer = setInterval(() => {
-        console.log('Timer running:', count);
         setCount((prev) => prev + 1);
       }, 1000);
     }
-    // Функція очищення таймера
+
     return () => {
-      if (timer) {
-        console.log('Cleaning up the timer');
-        clearInterval(timer);
-      }
+      if (timer) clearInterval(timer);
     };
   }, [isRunning]);
 

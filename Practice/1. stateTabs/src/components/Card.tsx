@@ -1,6 +1,11 @@
+import { CardType } from '../types';
 import CardTag from './CardTag';
 
-export default function Card({ cardObj }) {
+type CardProps = {
+  cardObj: CardType;
+};
+
+export default function Card({ cardObj }: CardProps) {
   return (
     <div className="card">
       <img className="card-image" src={cardObj.imageUrl} alt={cardObj.title} />
@@ -9,11 +14,10 @@ export default function Card({ cardObj }) {
         <p className="card-description">{cardObj.description}</p>
         <p className="card-date">{cardObj.date}</p>
 
-        {/* Tags section */}
         <div className="card-tags">
-          <CardTag tag={cardObj.tags[0]} />
-          {cardObj.tags[1] && <CardTag tag={cardObj.tags[1]} />}
-          {cardObj.tags[2] && <CardTag tag={cardObj.tags[2]} />}
+          {cardObj.tags.map((tag, index) => (
+            <CardTag key={index} tag={tag} />
+          ))}
         </div>
       </div>
     </div>

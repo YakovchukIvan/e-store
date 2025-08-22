@@ -2,19 +2,19 @@ import { useState } from 'react';
 import './index.css';
 import Header from './components/Header';
 import Instruction from './components/Instruction';
-import Main from './components/Main';
-import Footer from './components/Footer';
 import Section from './components/Section';
+import Main from './components/Main';
 import Button from './components/Button';
+import Footer from './components/Footer';
 
-function App() {
-  const [showInstructions, setShowInstructions] = useState(false);
+function App(): JSX.Element {
+  const [showInstructions, setShowInstructions] = useState<boolean>(false);
 
-  const toggleInstructions = () => {
+  const toggleInstructions = (): void => {
     setShowInstructions((prev) => !prev);
   };
 
-  const handleClick = () => {
+  const handleClick = (): void => {
     alert('Click');
   };
 
@@ -65,7 +65,7 @@ function App() {
         </Section>
 
         <Section title="Full Width Button">
-          <Button onClick={handleClick} variant="secondary " fullWidth>
+          <Button onClick={handleClick} variant="secondary" fullWidth>
             Full Width
           </Button>
         </Section>

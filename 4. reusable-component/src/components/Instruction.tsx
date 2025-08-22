@@ -1,4 +1,8 @@
-const Instruction = ({ showInstructions }) => {
+type InstructionProps = {
+  showInstructions: boolean;
+};
+
+const Instruction = ({ showInstructions }: InstructionProps) => {
   return (
     <div className={`app-instructions ${showInstructions ? 'open' : ''}`}>
       <h3>How to Use</h3>

@@ -4,7 +4,7 @@ import './index.css';
 function Calculator() {
   const [input, setInput] = useState('0');
 
-  const handleClick = (value) => {
+  const handleClick = (value: string) => {
     if (value === 'C') {
       setInput('0');
       return;
