@@ -1,32 +1,20 @@
 import { Link } from 'react-router-dom';
-
-const styleLink: React.CSSProperties = {
-  marginRight: '20px',
-  fontSize: '20px',
-  color: 'rgba(37, 146, 150, 1) ',
-  fontWeight: '600',
-};
+import { categories } from '../data/data';
 
 export default function Home() {
   return (
-    <div>
-      <h1>Home</h1>
-      <hr />
-      <Link to={'/'} style={styleLink}>
-        Home
-      </Link>
-      <Link to={'/about'} style={styleLink}>
-        About
-      </Link>
-      <Link to={'/cart'} style={styleLink}>
-        Cart
-      </Link>
-      <Link to={'/categories'} style={styleLink}>
-        Categories
-      </Link>
-      <Link to={'/product'} style={styleLink}>
-        Product
-      </Link>
+    <div className="home">
+      <h1>Categories</h1>
+      <ul className="categories">
+        {categories.map((category) => (
+          <li className="category-item" key={category.id}>
+            <Link to={`/category/${category.name}`}>
+              <span> {category.name}</span>
+              <img src={category.img} alt={category.name} />
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
