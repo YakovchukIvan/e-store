@@ -11,3 +11,7 @@ export interface Product {
   price: number;
   img: string;
 }
+
+export interface RouteParams extends Record<string, string | undefined> {
+  categoryId: string;
+}
