@@ -2,7 +2,7 @@ function LoginPage() {
   return (
     <div>
       Login Page
-      <button>Log in</button>
+      <button>Log in &</button>
       <button>Forgot login data</button>
     </div>
   );
