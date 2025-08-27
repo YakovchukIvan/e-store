@@ -1,28 +1,54 @@
 // 01. Побудуйте маршрутизатор відповідно до цієї структури
 // src/
 // ├── components/
-// │   ├── Header.tsx           // Навигационное меню с Link/NavLink
-// │   ├── Footer.tsx           // Футер страницы
+// │   ├── Header.tsx           // Навігаційне меню с Link/NavLink
+// │   ├── Footer.tsx           // Футер сторінки
 // ├── pages/
-// │   ├── HomePage.tsx         // Главная страница
-// │   ├── AboutPage.tsx        // Статическая страница "О нас"
-// │   ├── ProductsPage.tsx     // Страница со списком продуктов
-// │   ├── ProductDetails.tsx   // Страница с подробной информацией о продукте
-// │   ├── SearchPage.tsx       // Страница поиска с использованием query string
-// │   ├── LoginPage.tsx        // Пример редиректа при логине
-// │   └── NotFoundPage.tsx     // Страница 404
-// ├── App.tsx                  // Корневой компонент с <Router> и маршрутизацией
+// │   ├── HomePage.tsx         // Головна сторінка
+// │   ├── AboutPage.tsx        // Статична сторінка "О нас"
+// │   ├── ProductsPage.tsx     // Сторінка зі списком продуктів
+// │   ├── ProductDetails.tsx   // Сторінка с детальною інформацією про продукт
+// │   ├── SearchPage.tsx       // Сторінка пошуку з використанням query string
+// │   ├── LoginPage.tsx        // Приклад редиректу при логіну
+// │   └── NotFoundPage.tsx     // Сторінка 404
+// ├── App.tsx                  // Корневий компонент с <Router> і маршрутизацією
+
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Layout from './components/Layout';
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import LoginPage from './pages/LoginPage';
+import NotFoundPage from './pages/NotFoundPage';
+import ProductsPage from './pages/ProductsPage';
+import ProductDetails from './pages/ProductDetails';
+import SearchPage from './pages/SearchPage';
 
 // 02. Створіть посилання на сторінки в компоненті Header і розмістіть їх на всіх сторінках будь-яким зручним способом.
-// 03. Настройте путь на страницу ProductDetails динамически. Відобразіть на сторінці параметр із шляху поточної сторінки.
+// 03. Налаштуйте шлях на сторінку ProductDetails динамічним. Відображте на сторінці параметр із шляху поточної сторінки.
 // 04. Подивіться завдання по рядку запиту в компоненті searchPage.tsx.
 // 05. У компоненті LoginPage налаштуйте кнопку "Увійти" з використанням <Link></Link>, щоб вона перенаправляла користувача на головну сторінку і передавала стан об'єкта {login: "Ви увійшли"}.
 // 06. У компоненті LoginPage програмно налаштуйте кнопку "Забули логін", щоб вона перенаправляла користувача на головну сторінку і передавала стан об'єкта {login: "Ви не ввійшли"}.
-// 07. На головній сторінці відобразіть значення state login всередині тега <p></p>.
+// 07. На головній сторінці відображте значення state login всередині тега <p></p>.
 // 08. Перенаправте всі неіснуючі сторінки на головну сторінку.
 
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: 'about', element: <AboutPage /> },
+      { path: 'products', element: <ProductsPage /> },
+      { path: 'products/:productName', element: <ProductDetails /> },
+      { path: 'login', element: <LoginPage /> },
+      { path: 'search', element: <SearchPage /> },
+      { path: '*', element: <NotFoundPage /> },
+    ],
+  },
+]);
+
 function App() {
-  return <div></div>;
+  return <RouterProvider router={router} />;
 }
 
 export default App;

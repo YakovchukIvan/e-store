@@ -44,7 +44,6 @@ h1 {
 }
 
 a {
-  margin-right: 20px;
   font-size: 24px;
   color: rgb(151, 181, 182);
   font-weight: 600;
@@ -54,7 +53,7 @@ a {
   color: rgb(206, 228, 155);
 }
 
-footer {
+footer > hr {
   margin-top: 300px;
 }
 
@@ -68,22 +67,24 @@ footer {
   text-align: center;
   padding: 0;
 }
+
 .category-item {
+  border-radius: 16px;
+  background: #3b70d3;
+  border: 2px solid #4c5788;
   width: 200px;
-  transition: transform 0.2s;
+  /* display: flex; */
+  /* justify-content: center; */
+  padding: 2px 4px;
 }
 
 .category-item:hover {
   transform: scale(1.02);
+  background: #183e85;
 }
 
 .category-item > a {
   color: #ffffff;
-}
-
-.category-item > a > img {
-  width: 100%;
-  margin-top: 5px;
 }
 
 .product-details {
@@ -100,4 +101,28 @@ footer {
 .product-item > img {
   width: 100%;
   border-radius: 16px;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login > button {
+  background: #dd3535;
+  border: 2px solid #4c5788;
+  border-radius: 16px;
+  color: floralwhite;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px 16px;
+}
+
+.login > button:hover {
+  opacity: 0.8;
+}
+
+.login > button:active {
+  transform: scale(1.02);
 }
