@@ -66,7 +66,7 @@ function About() {
 
       {/* Зображення */}
       <h3>Our Happy Customers</h3>
-      <img src="https://via.placeholder.com/400x200" alt="Happy customers" />
+      <img src="https://dummyjson.com/image/400x200/282828" alt="Happy customers" />
       <p>Join thousands of happy customers who trust us with their shopping needs.</p>
     </div>
   );
