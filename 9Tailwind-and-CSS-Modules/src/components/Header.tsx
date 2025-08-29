@@ -1,14 +1,26 @@
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import CustomNavLink from '../UI/NavLink';
 
 function Header() {
   return (
-    <>
-      <h1 className="flex mb-2 text-4xl text-emerald-500">Header</h1>
-      <NavLink to={'/'}>Home</NavLink>
-      <NavLink to={'/about'}>About</NavLink>
-      <NavLink to={'/cart'}>Cart</NavLink>
-      <hr />
-    </>
+    <header className="flex justify-between p-10 bg-blue-200 shadow-md">
+      <Link to="/">
+        <img className="h-8" src="/logo.svg" alt="" />
+      </Link>
+      <nav>
+        <ul className="flex gap-x-10">
+          <li>
+            <CustomNavLink to="/">Home</CustomNavLink>
+          </li>
+          <li>
+            <CustomNavLink to="/about">About</CustomNavLink>
+          </li>
+          <li>
+            <CustomNavLink to="/cart">Cart</CustomNavLink>
+          </li>
+        </ul>
+      </nav>
+    </header>
   );
 }
 

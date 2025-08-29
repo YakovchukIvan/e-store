@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-.active {
-  font-weight: bold;
-}
+/* @layer components {
+  .links {
+    @apply text-xl font-bold text-blue-600 hover:text-red-400;
+  }
+} */
