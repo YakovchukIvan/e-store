@@ -7,7 +7,7 @@ const Cart: FC = () => {
   };
 
   return (
-    <div>
+    <div className="prose lg:prose-xl">
       <h1>Shopping Cart</h1>
 
       {/* Список товарів */}
