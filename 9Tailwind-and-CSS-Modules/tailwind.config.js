@@ -20,5 +20,16 @@ export default {
       },
     },
   },
+  variants: {
+    extend: {
+      animation: ['group-hover'],
+    },
+  },
   plugins: [require('@tailwindcss/typography'), textShadow],
 };
+
+// theme → налаштування теми (кольори, шрифти, брейкпоінти, keyframes, animation і т.д.).
+
+// variants → це місце, де ми кажемо Tailwind: «для яких станів (hover, focus, group-hover, active і т.д.) генерувати класи».
+
+// plugins → розширення Tailwind плагінами.

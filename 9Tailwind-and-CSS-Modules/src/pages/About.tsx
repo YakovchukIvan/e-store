@@ -1,6 +1,6 @@
 function About() {
   return (
-    <div className="prose lg:prose-xl">
+    <div className="py-10 m-auto prose lg:prose-xl">
       {/* Заголовки */}
       <h1 className="text-shadow-xl">About Our E-commerce Platform</h1>
       <h2>Our Vision</h2>

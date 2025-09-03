@@ -6,7 +6,7 @@ import { Category } from '../types/types';
 const Home: FC = () => {
   return (
     <div className="py-10 sm:py-16 md:py-20">
-      <h1 className="mb-8 text-2xl font-semibold text-center ">Categories</h1>
+      <h1 className="mb-8 text-3xl font-semibold text-center hover:animate-wiggle">Categories</h1>
       <ul className="grid grid-cols-3 gap-4 px-5">
         {categories.map((category: Category) => (
           <li key={category.id}>
@@ -14,7 +14,7 @@ const Home: FC = () => {
               className="relative flex items-center justify-center group"
               to={`/category/${category.name}`}
             >
-              <span className="absolute z-10 text-xl font-semibold text-white transition duration-1000 ease-out group-hover:text-red-500 group-hover:text-2xl animate-wiggle">
+              <span className="absolute z-10 text-2xl font-semibold text-white transition duration-1000 ease-out group-hover:scale-110">
                 {category.name}
               </span>
               <img className="rounded-lg " src={category.img} alt={category.name} />
