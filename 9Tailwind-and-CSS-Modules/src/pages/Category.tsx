@@ -1,19 +1,13 @@
 import { FC, ChangeEvent } from 'react';
-import { Link, useLocation, useParams, useSearchParams, Location } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { products } from '../data/data';
 import { Product } from '../types/types';
-
-interface LocationState {
-  maxPrice: number;
-}
 
 const Category: FC = () => {
   const { categoryId } = useParams<{ categoryId: string }>();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const location = useLocation() as Location & { state: LocationState };
-
-  const maxPrice = location.state?.maxPrice ?? Infinity; // якщо state немає, беремо без обмежень
+  const maxPrice = Number(searchParams.get('maxPrice')) || Infinity;
 
   const currentCategoryArray: Product[] = products.filter(
     (product) => product.categoryId === categoryId && product.price <= maxPrice,
@@ -25,11 +19,14 @@ const Category: FC = () => {
   };
 
   return (
-    <div>
-      <h1>Category {categoryId}</h1>
-      <div>
-        <label htmlFor="maxPrice">Max Price </label>
+    <div className="p-10 m-auto">
+      <h1 className="mb-8 text-4xl text-center">Category {categoryId}</h1>
+      <div className="mb-20">
+        <label className="pr-4 text-lg" htmlFor="maxPrice">
+          Max Price:
+        </label>
         <input
+          className="p-2 text-xl rounded-lg"
           type="number"
           id="maxPrice"
           placeholder="Enter max price"
@@ -37,12 +34,14 @@ const Category: FC = () => {
           onChange={handleChange}
         />
       </div>
-      <ul style={{ display: 'flex', listStyle: 'none', gap: '20px' }}>
+      <ul className="flex justify-start gap-8 p-0 m-0 list-none">
         {currentCategoryArray.map((product: Product) => (
           <li key={product.id}>
             <Link to={`/product/${product.id}`}>
-              {product.name} {product.price}$
-              <img src={product.img} alt={product.name} style={{ width: '150px' }} />
+              <span className="text-lg ">
+                {product.name} {product.price}$
+              </span>
+              <img src={product.img} alt={product.name} className="mt-4 rounded-xl min-w-40" />
             </Link>
           </li>
         ))}
