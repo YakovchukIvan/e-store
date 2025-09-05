@@ -36,12 +36,12 @@ const Category: FC = () => {
       </div>
       <ul className="flex justify-start gap-8 p-0 m-0 list-none">
         {currentCategoryArray.map((product: Product) => (
-          <li key={product.id}>
+          <li className="hover:drop-shadow-2xl" key={product.id}>
             <Link to={`/product/${product.id}`}>
               <span className="text-lg ">
                 {product.name} {product.price}$
               </span>
-              <img src={product.img} alt={product.name} className="mt-4 rounded-xl min-w-40" />
+              <img src={product.img} alt={product.name} className="mt-4 rounded-xl max-w-60" />
             </Link>
           </li>
         ))}

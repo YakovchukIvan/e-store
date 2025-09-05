@@ -13,16 +13,16 @@ const ProductDetails: FC = () => {
   console.log(product);
 
   return (
-    <div>
+    <div className="flex justify-center p-10 m-auto drop-shadow-2xl">
       {product ? (
-        <>
-          <h1>Product Details</h1>
-          <h2>{product.name}</h2>
-          <p>Price: {product.price}$</p>
-          <img src={product.img} alt={product.name} style={{ width: '150px' }} />
-        </>
+        <div className="flex flex-col items-center p-10 border-2 rounded-xl border-sky-300 max-w-96 ">
+          <h1 className="mb-6 text-4xl">Product Details</h1>
+          <h2 className="mb-4 text-2xl">{product.name}</h2>
+          <p className="mb-2 text-xl font-bold text-red-500">Price: {product.price}$</p>
+          <img className="mt-4 rounded-xl max-w-80" src={product.img} alt={product.name} />
+        </div>
       ) : (
-        <p>Not Found</p>
+        <p>Not found product</p>
       )}
     </div>
   );
