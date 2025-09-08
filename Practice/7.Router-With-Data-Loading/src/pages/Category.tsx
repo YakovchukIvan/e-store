@@ -1,9 +1,10 @@
 import { FC, ChangeEvent } from 'react';
-import { Link, useParams, useSearchParams } from 'react-router-dom';
-import { products } from '../data/data';
+import { Link, useLoaderData, useParams, useSearchParams } from 'react-router-dom';
 import { Product } from '../types/types';
 
 const Category: FC = () => {
+  const products = useLoaderData<Product[]>();
+
   const { categoryId } = useParams<{ categoryId: string }>();
   const [searchParams, setSearchParams] = useSearchParams();
 

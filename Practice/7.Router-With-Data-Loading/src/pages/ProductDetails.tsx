@@ -1,16 +1,9 @@
 import { FC } from 'react';
-import { useParams } from 'react-router-dom';
-import { products } from '../data/data';
+import { useLoaderData } from 'react-router-dom';
 import { Product } from '../types/types';
 
 const ProductDetails: FC = () => {
-  // useParams типізуємо як об’єкт з рядковими значеннями
-  const { productId } = useParams<{ productId: string }>();
-
-  // знаходимо продукт, перетворюючи productId у число
-  const product: Product | undefined = products.find((p) => p.id === parseInt(productId || '', 10));
-
-  console.log(product);
+  const product = useLoaderData() as Product;
 
   return (
     <div className="flex justify-center p-10 m-auto drop-shadow-2xl">

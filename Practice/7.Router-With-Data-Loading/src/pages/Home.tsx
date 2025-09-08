@@ -1,9 +1,10 @@
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
-import { categories } from '../data/data';
+import { Link, useLoaderData } from 'react-router-dom';
 import { Category } from '../types/types';
 
 const Home: FC = () => {
+  const categories = useLoaderData<Category[]>();
+
   return (
     <div className="py-10 sm:py-16 md:py-20">
       <h1 className="mb-8 text-3xl font-semibold text-center hover:animate-wiggle">Categories</h1>
