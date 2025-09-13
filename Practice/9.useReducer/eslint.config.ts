@@ -47,7 +47,7 @@ export default {
         js.configs.recommended,
         'plugin:@typescript-eslint/recommended',
         reactHooks.configs['recommended-latest'],
-        reactRefresh.configs.vite,
+        (reactRefresh as any).configs.vite,
         'plugin:prettier/recommended',
       ],
     },

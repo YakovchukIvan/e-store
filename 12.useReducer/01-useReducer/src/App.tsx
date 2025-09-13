@@ -11,8 +11,6 @@
 
 // export default App;
 
-// @ts-nocheck
-
 import { useReducer } from 'react';
 
 type State = {
@@ -44,11 +42,6 @@ function reducer(state: State, action: Action): State {
       return { ...state, count: state.count + action.payload };
     case 'updateInput':
       return { ...state, inputValue: action.payload };
-    default: {
-      // Захист від пропущених кейсів (ніколи не виконається, але гарантує типобезпеку)
-      const _exhaustiveCheck: never = action;
-      return state;
-    }
   }
 }
 
