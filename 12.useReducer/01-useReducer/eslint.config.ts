@@ -1,11 +1,11 @@
 import js from '@eslint/js';
 import globals from 'globals';
 import react from 'eslint-plugin-react';
-import reactHooks from 'eslint-plugin-react-hooks';
-import reactRefresh from 'eslint-plugin-react-refresh';
 import prettier from 'eslint-plugin-prettier';
 import tsParser from '@typescript-eslint/parser';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
+const reactHooks = require('eslint-plugin-react-hooks');
+const reactRefresh = require('eslint-plugin-react-refresh');
 
 export default {
   ignores: ['dist'],
@@ -14,8 +14,6 @@ export default {
       files: ['**/*.{ts,tsx}'],
       plugins: {
         react,
-        reactHooks,
-        reactRefresh,
         prettier,
         '@typescript-eslint': tsPlugin,
       },
