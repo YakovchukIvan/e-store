@@ -1,13 +1,13 @@
-/** @type {import('tailwindcss').Config} */
-
+import type { Config } from 'tailwindcss';
 import textShadow from 'tailwindcss-textshadow';
+import typography from '@tailwindcss/typography';
 
-export default {
+const config: Config = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       fontFamily: {
-        poppins: 'popins, sans-serif',
+        poppins: 'poppins, sans-serif', // виправив typo
       },
       keyframes: {
         wiggle: {
@@ -25,8 +25,10 @@ export default {
       animation: ['group-hover'],
     },
   },
-  plugins: [require('@tailwindcss/typography'), textShadow],
+  plugins: [typography, textShadow],
 };
+
+export default config;
 
 // theme → налаштування теми (кольори, шрифти, брейкпоінти, keyframes, animation і т.д.).
 
