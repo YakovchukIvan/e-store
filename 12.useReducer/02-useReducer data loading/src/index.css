@@ -32,6 +32,10 @@ li {
   border-bottom: 1px solid #ddd;
 }
 
+.candidate-name {
+  flex: 0 0 50%;
+}
+
 li:last-child {
   border-bottom: none;
 }
@@ -45,6 +49,12 @@ button {
   cursor: pointer;
 }
 
+button {
+  background-color: #ff9800;
+  color: white;
+  font-size: 18px;
+}
+
 button:hover {
   opacity: 0.8;
 }
@@ -53,22 +63,17 @@ button:active {
   transform: scale(0.95);
 }
 
-button:nth-child(1) {
+.increment {
   background-color: #4caf50;
   color: white;
 }
 
-button:nth-child(2) {
+.decrement {
   background-color: #f44336;
   color: white;
 }
 
-button:nth-child(3) {
-  background-color: #ff9800;
-  color: white;
-}
-
-input[type="text"] {
+input[type='text'] {
   margin: 10px 0;
   padding: 8px;
   width: calc(100% - 20px);
