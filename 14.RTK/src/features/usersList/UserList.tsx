@@ -1,19 +1,21 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { deleteUser } from './userListSlice';
+import { AppDispatch, RootState } from '../../store';
+import { deleteUser, fetchUsers } from './userListSlice';
 
 function UserList() {
   const users = useSelector((state: RootState) => state.userList.users);
   const loading = useSelector((state: RootState) => state.userList.loading);
   const error = useSelector((state: RootState) => state.userList.error);
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   return (
     <div className="user-list">
       <h2>User List</h2>
 
-      <button className="load-btn">Load Users</button>
+      <button onClick={() => dispatch(fetchUsers())} className="load-btn">
+        Load Users
+      </button>
 
       {loading && <p>Loading ...</p>}
       {error && <p>Error ...</p>}
