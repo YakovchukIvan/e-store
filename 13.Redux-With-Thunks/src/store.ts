@@ -1,11 +1,10 @@
-import { createStore } from 'redux';
-import userListReducer from './features/usersList/userListSlice';
+import { createStore, applyMiddleware } from 'redux';
+import { thunk } from 'redux-thunk';
+import rootReducer from './rootReducer';
 
-const store = createStore(
-  userListReducer,
-  (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__(),
-);
+const store = createStore(rootReducer, applyMiddleware(thunk as any));
 
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppDispatch = typeof store.dispatch;
 
 export default store;
