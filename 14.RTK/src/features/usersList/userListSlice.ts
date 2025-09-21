@@ -11,6 +11,9 @@ const initialState: State = {
 
 export const fetchUsers = createAsyncThunk<User[], void>('userList/fetchUsers', async () => {
   const res = await fetch(API);
+  if (!res.ok) {
+    throw new Error('Server error');
+  }
   const data: User[] = await res.json();
   return data;
 });
